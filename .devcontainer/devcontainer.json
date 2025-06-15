@@ -1,0 +1,22 @@
+{
+  // Name shown in VS Code status bar
+  "name": "AIMvNASDAQ (Python 3.12, venv)",
+
+  // Official Python Dev Container image (tags: 3.9-3.12)
+  "image": "mcr.microsoft.com/devcontainers/python:3.12",
+
+  // After the container is built, run these commands:
+  "postCreateCommand": [
+    // 1) create an in-workspace virtual-env
+    "python -m venv /workspaces/.venv",
+    // 2) activate & upgrade pip
+    "source /workspaces/.venv/bin/activate && pip install --upgrade pip",
+    // 3) install everything in requirements.txt
+    "source /workspaces/.venv/bin/activate && pip install -r /workspaces/requirements.txt"
+  ],
+
+  // Tell VS Code to use that venv automatically
+  "settings": {
+    "python.defaultInterpreterPath": "/workspaces/.venv/bin/python"
+  }
+}
