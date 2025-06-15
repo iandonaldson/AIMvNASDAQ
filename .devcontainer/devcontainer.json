@@ -1,22 +1,21 @@
 {
-  // Name shown in VS Code status bar
-  "name": "AIMvNASDAQ (Python 3.12, venv)",
-
-  // Official Python Dev Container image (tags: 3.9-3.12)
+  "name": "AIMvNASDAQ (Py 3.12 + venv)",
   "image": "mcr.microsoft.com/devcontainers/python:3.12",
 
-  // After the container is built, run these commands:
+  // Run once after the container is built
   "postCreateCommand": [
-    // 1) create an in-workspace virtual-env
-    "python -m venv /workspaces/.venv",
-    // 2) activate & upgrade pip
-    "source /workspaces/.venv/bin/activate && pip install --upgrade pip",
-    // 3) install everything in requirements.txt
-    "source /workspaces/.venv/bin/activate && pip install -r /workspaces/requirements.txt"
+    // 1) Create venv inside the workspace
+    "python -m venv .venv",
+
+    // 2) Activate venv & install deps (note: path is just requirements.txt)
+    ". .venv/bin/activate && pip install --upgrade pip && pip install -r requirements.txt",
+
+    // 3) Auto-activate venv for every future shell session
+    "echo 'source $(pwd)/.venv/bin/activate' >> ~/.bashrc"
   ],
 
-  // Tell VS Code to use that venv automatically
+  // Tell VS Code which interpreter to use for Run/Debug
   "settings": {
-    "python.defaultInterpreterPath": "/workspaces/.venv/bin/python"
+    "python.defaultInterpreterPath": "${workspaceFolder}/.venv/bin/python"
   }
 }
